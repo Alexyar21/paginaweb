@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💖 Nuestro Aniversario — 13 de Marzo 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --rose:#e8365d; --rose-light:#ff6b8a; --rose-pale:#fff0f3;
+  --gold:#d4af37; --cream:#fff9f5; --deep:#3a0a1e;
+}
+body {
+  background:var(--cream); font-family:'Lato',sans-serif; overflow-x:hidden;
+  cursor:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='26' font-size='26'>💖</text></svg>") 16 16, auto;
+}
+#hearts-canvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+
+/* HERO */
+.hero {
+  position:relative; min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center; padding:2rem;
+  background:linear-gradient(160deg,#fff0f3 0%,#ffe4ec 40%,#ffd6e7 100%); z-index:1;
+}
+.petals-ring { font-size:2rem; letter-spacing:0.5rem; margin-bottom:1rem; animation:spin-slow 20s linear infinite; display:inline-block; }
+@keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+.hero-date { font-family:'Lato',sans-serif; font-weight:300; font-size:1rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--rose); margin-bottom:1.2rem; }
+.hero-title { font-family:'Great Vibes',cursive; font-size:clamp(3.5rem,10vw,7rem); color:var(--deep); line-height:1.1; margin-bottom:0.5rem; text-shadow:2px 2px 20px rgba(232,54,93,0.15); }
+.hero-sub { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1.1rem,3vw,1.6rem); color:#7a3050; margin-bottom:2.5rem; }
+.big-heart { font-size:2.5rem; animation:heartbeat 1.4s ease-in-out infinite; }
+@keyframes heartbeat { 0%,100%{transform:scale(1)} 14%{transform:scale(1.2)} 28%{transform:scale(1)} 42%{transform:scale(1.15)} 56%{transform:scale(1)} }
+.scroll-hint { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); font-size:1.5rem; animation:bounce 2s ease infinite; color:var(--rose); }
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(10px)} }
+
+/* SECTIONS */
+.sec { position:relative; z-index:1; padding:5rem 1.5rem; max-width:900px; margin:0 auto; text-align:center; }
+.sec-full { position:relative; z-index:1; padding:4rem 1.5rem; text-align:center; }
+.section-title { font-family:'Great Vibes',cursive; font-size:clamp(2.5rem,7vw,4.5rem); color:var(--rose); margin-bottom:0.5rem; }
+.section-sub { font-family:'Playfair Display',serif; font-style:italic; color:#7a3050; font-size:1.05rem; margin-bottom:2.5rem; }
+.rose-sep { text-align:center; font-size:1.4rem; letter-spacing:0.4rem; margin:0.5rem 0 2rem; color:var(--rose); opacity:0.5; }
+
+/* GIF SECTION */
+.gif-section { background:linear-gradient(135deg,#fff0f3,#fff5e6); padding:4rem 1.5rem; border-top:1px dashed rgba(232,54,93,0.2); border-bottom:1px dashed rgba(232,54,93,0.2); position:relative; z-index:1; }
+.gif-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.5rem; max-width:860px; margin:0 auto; }
+.gif-card { background:white; border-radius:20px; overflow:hidden; box-shadow:0 8px 30px rgba(232,54,93,0.12); border:2px solid rgba(232,54,93,0.1); transition:transform 0.3s ease, box-shadow 0.3s ease; }
+.gif-card:hover { transform:translateY(-6px) rotate(1deg); box-shadow:0 16px 40px rgba(232,54,93,0.22); }
+.gif-card img { width:100%; height:200px; object-fit:cover; display:block; }
+.gif-label { padding:0.6rem; font-family:'Playfair Display',serif; font-style:italic; color:var(--rose); font-size:0.9rem; background:white; }
+
+/* POKEMON SECTION */
+.poke-section {
+  background:linear-gradient(135deg,#1a1a2e 0%,#2d0a3e 50%,#1a0a2e 100%);
+  padding:4rem 1.5rem; text-align:center;
+  border-top:3px solid #FFD700; border-bottom:3px solid #FFD700;
+  position:relative; overflow:hidden; z-index:1;
+}
+.poke-title { font-family:'Great Vibes',cursive; font-size:clamp(2.5rem,7vw,4.5rem); color:#FFD700; margin-bottom:0.5rem; text-shadow:0 0 20px rgba(255,215,0,0.4); }
+.poke-sub { font-family:'Playfair Display',serif; font-style:italic; color:rgba(255,215,0,0.7); font-size:1.05rem; margin-bottom:2.5rem; }
+.poke-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1.5rem; max-width:900px; margin:0 auto; }
+.poke-card { background:rgba(255,255,255,0.06); border-radius:20px; overflow:hidden; border:2px solid rgba(255,215,0,0.25); box-shadow:0 8px 30px rgba(0,0,0,0.4); transition:transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s; }
+.poke-card:hover { transform:translateY(-8px) scale(1.02); box-shadow:0 20px 50px rgba(255,215,0,0.2); border-color:rgba(255,215,0,0.7); }
+.poke-card img { width:100%; height:200px; object-fit:cover; display:block; }
+.poke-label { padding:0.7rem; font-family:'Playfair Display',serif; font-style:italic; color:#FFD700; font-size:0.9rem; background:rgba(0,0,0,0.3); text-align:center; }
+.poke-tenor { width:100%; height:200px; overflow:hidden; position:relative; background:#0d0d1a; }
+.poke-tenor .tenor-gif-embed { width:100% !important; }
+
+/* MESSAGE */
+.message-card { background:white; border-radius:24px; padding:3rem 2.5rem; box-shadow:0 12px 50px rgba(232,54,93,0.1); border:1px solid rgba(232,54,93,0.15); position:relative; max-width:700px; margin:0 auto; text-align:left; }
+.message-card::before { content:'"'; font-family:'Great Vibes',cursive; font-size:8rem; color:rgba(232,54,93,0.08); position:absolute; top:-1rem; left:1rem; line-height:1; }
+.message-text { font-family:'Playfair Display',serif; font-size:1.15rem; line-height:1.9; color:#4a1a30; position:relative; z-index:1; }
+.message-text strong { color:var(--rose); font-weight:700; }
+.message-signature { text-align:right; font-family:'Great Vibes',cursive; font-size:2rem; color:var(--rose); margin-top:1.5rem; }
+
+/* QUESTION */
+.question-section { background:linear-gradient(135deg,#fff0f3 0%,#ffe4f5 50%,#f5e0ff 100%); padding:5rem 1.5rem; text-align:center; position:relative; overflow:hidden; z-index:1; }
+.q-card { background:white; border-radius:30px; padding:3rem 2rem; box-shadow:0 20px 60px rgba(232,54,93,0.15); border:2px solid rgba(232,54,93,0.12); max-width:600px; margin:0 auto; }
+.q-emoji { font-size:4rem; margin-bottom:1rem; animation:heartbeat 1.4s ease-in-out infinite; display:block; }
+.q-text { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,4vw,1.9rem); color:var(--deep); line-height:1.5; margin-bottom:2rem; font-weight:700; }
+.q-text span { color:var(--rose); }
+.btn-wrap { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; margin-top:1rem; }
+.btn-yes { background:linear-gradient(135deg,#e8365d,#ff6b8a); color:white; border:none; padding:1rem 3rem; border-radius:50px; font-family:'Great Vibes',cursive; font-size:2rem; cursor:pointer; transition:all 0.3s; box-shadow:0 6px 25px rgba(232,54,93,0.4); }
+.btn-yes:hover { transform:translateY(-3px) scale(1.05); box-shadow:0 12px 35px rgba(232,54,93,0.5); }
+.btn-no { background:white; color:#aaa; border:2px solid #ddd; padding:1rem 3rem; border-radius:50px; font-family:'Great Vibes',cursive; font-size:2rem; cursor:pointer; transition:all 0.3s; }
+.btn-no:hover { border-color:#ffb3c6; color:#ffb3c6; }
+
+/* RESPONSE SCREENS */
+.response-screen { display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding:2rem; overflow-y:auto; }
+.response-screen.active { display:flex; }
+.screen-yes { background:linear-gradient(135deg,#fff0f3,#ffe4ec,#ffd6f5); animation:fadeIn 0.5s ease; }
+.screen-no { background:linear-gradient(135deg,#e8f0ff,#dde8ff,#e0ecff); animation:fadeIn 0.5s ease; }
+@keyframes fadeIn { from{opacity:0;transform:scale(0.9)} to{opacity:1;transform:scale(1)} }
+.screen-title-yes { font-family:'Great Vibes',cursive; font-size:clamp(3rem,10vw,6rem); color:var(--rose); text-shadow:2px 2px 20px rgba(232,54,93,0.2); margin-bottom:1rem; line-height:1.1; }
+.screen-title-no { font-family:'Great Vibes',cursive; font-size:clamp(2.5rem,8vw,5rem); color:#6a8fff; margin-bottom:1rem; line-height:1.1; }
+.screen-msg { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1rem,3vw,1.4rem); max-width:550px; line-height:1.8; margin-bottom:2rem; }
+.screen-msg-yes { color:#4a1a30; }
+.screen-msg-no { color:#3a4a7a; }
+.close-screen { background:white; color:var(--rose); border:2px solid var(--rose); padding:0.7rem 2rem; border-radius:50px; cursor:pointer; font-family:'Lato',sans-serif; font-size:0.95rem; margin-top:1.5rem; transition:all 0.3s; }
+.close-screen:hover { background:var(--rose); color:white; }
+.confetti-dot { position:fixed; pointer-events:none; z-index:99999; border-radius:50%; animation:confetti-fall 1.5s ease-out forwards; }
+@keyframes confetti-fall { 0%{opacity:1;transform:translateY(0) rotate(0deg)} 100%{opacity:0;transform:translateY(200px) rotate(720deg)} }
+
+/* MEDIA */
+.media-section { background:#fff8fc; border-radius:24px; padding:2.5rem; margin:2rem auto; max-width:860px; border:2px dashed rgba(232,54,93,0.25); }
+.media-title { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--deep); margin-bottom:0.3rem; display:flex; align-items:center; gap:0.5rem; justify-content:center; }
+.media-hint { font-size:0.85rem; color:#a07080; margin-bottom:1.5rem; }
+.photo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:0.8rem; margin-bottom:1.2rem; }
+.photo-slot { aspect-ratio:1; border-radius:14px; overflow:hidden; background:#fde8ef; border:2px solid rgba(232,54,93,0.15); position:relative; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; }
+.photo-slot:hover { border-color:var(--rose); transform:scale(1.03); }
+.photo-slot img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+.photo-slot .add-icon { font-size:1.8rem; color:var(--rose-light); }
+.upload-btn { background:linear-gradient(135deg,var(--rose),var(--rose-light)); color:white; border:none; padding:0.75rem 2rem; border-radius:50px; font-family:'Lato',sans-serif; font-size:0.95rem; cursor:pointer; transition:all 0.3s; box-shadow:0 4px 15px rgba(232,54,93,0.3); display:inline-flex; align-items:center; gap:0.5rem; }
+.upload-btn:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(232,54,93,0.4); }
+input[type=file] { display:none; }
+
+.audio-player { background:linear-gradient(135deg,#3a0a1e,#6b0f35); border-radius:20px; padding:1.8rem; color:white; margin:1.5rem 0; position:relative; overflow:hidden; }
+.audio-title { font-family:'Great Vibes',cursive; font-size:1.8rem; margin-bottom:0.5rem; }
+.audio-sub { font-size:0.85rem; opacity:0.7; margin-bottom:1rem; }
+audio { width:100%; border-radius:12px; }
+
+/* VIDEO */
+.video-container { border-radius:20px; overflow:hidden; background:#1a0010; aspect-ratio:16/9; position:relative; box-shadow:0 12px 40px rgba(58,10,30,0.3); }
+.video-container video { width:100%; height:100%; object-fit:cover; display:block; }
+.video-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(135deg,rgba(58,10,30,0.85),rgba(107,15,53,0.85)); gap:0.8rem; cursor:pointer; transition:opacity 0.3s; }
+.video-overlay.hidden { opacity:0; pointer-events:none; }
+.video-play-icon { width:70px; height:70px; background:rgba(255,255,255,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem; transition:all 0.3s; border:2px solid rgba(255,255,255,0.3); }
+.video-overlay:hover .video-play-icon { background:rgba(232,54,93,0.5); transform:scale(1.1); }
+.video-overlay p { color:rgba(255,255,255,0.7); font-size:0.9rem; }
+.video-upload-area { border:2px dashed rgba(232,54,93,0.4); border-radius:14px; padding:1rem; margin-top:1rem; text-align:center; }
+.video-upload-info { color:#a07080; font-size:0.85rem; margin-bottom:0.8rem; }
+
+/* COUNTDOWN */
+.countdown-wrap { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; margin:2rem 0; }
+.count-box { background:white; border-radius:20px; padding:1.5rem 1.8rem; box-shadow:0 8px 30px rgba(232,54,93,0.12); min-width:100px; border-top:4px solid var(--rose); }
+.count-num { font-family:'Playfair Display',serif; font-size:3rem; font-weight:700; color:var(--rose); line-height:1; display:block; }
+.count-label { font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:#a07080; margin-top:0.3rem; }
+
+/* FOOTER */
+footer { background:var(--deep); color:rgba(255,255,255,0.7); text-align:center; padding:3rem 1.5rem; position:relative; z-index:1; }
+.footer-hearts { font-size:1.5rem; letter-spacing:0.3rem; margin-bottom:1rem; }
+.footer-title { font-family:'Great Vibes',cursive; font-size:2.2rem; color:var(--rose-light); margin-bottom:0.5rem; }
+
+/* FADE IN */
+.fade-in { opacity:0; transform:translateY(30px); transition:opacity 0.8s ease, transform 0.8s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+.sparkle { position:fixed; pointer-events:none; z-index:9999; font-size:1.2rem; animation:sparkle-fade 1s ease-out forwards; }
+@keyframes sparkle-fade { 0%{opacity:1;transform:scale(1) translateY(0)} 100%{opacity:0;transform:scale(0.3) translateY(-40px)} }
+
+@media(max-width:600px){
+  .gif-grid,.poke-grid{grid-template-columns:repeat(2,1fr)}
+  .message-card{padding:2rem 1.5rem}
+  .sec{padding:3.5rem 1rem}
+  .btn-yes,.btn-no{padding:0.8rem 2rem;font-size:1.7rem}
+}
+</style>
+</head>
+<body>
+
+<canvas id="hearts-canvas"></canvas>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="petals-ring">🌹🌸🌺🌹🌸🌺🌹🌸</div>
+  <div class="hero-date">13 de Marzo — Nuestro Día</div>
+  <h1 class="hero-title">Feliz Aniversario</h1>
+  <p class="hero-sub">Cada día a tu lado es el más hermoso de mi vida</p>
+  <div style="display:flex;align-items:center;gap:1rem;margin:1.5rem auto;width:fit-content;">
+    <span style="width:80px;height:1px;background:linear-gradient(to right,transparent,var(--rose));display:block;"></span>
+    <div class="big-heart">💖</div>
+    <span style="width:80px;height:1px;background:linear-gradient(to left,transparent,var(--rose));display:block;"></span>
+  </div>
+  <div style="display:flex;gap:0.8rem;justify-content:center;font-size:2rem;flex-wrap:wrap;">💕 🌹 💝 🌸 💗 🌹 💓 🌺 💞</div>
+  <div class="scroll-hint">💖</div>
+</div>
+
+<!-- GIFs OSITOS -->
+<div class="gif-section">
+  <div style="text-align:center;margin-bottom:2rem;">
+    <h2 class="section-title">Para ti, con todo mi amor</h2>
+    <p class="section-sub">Ositos, corazones y mucha ternura 🐻💕</p>
+    <div class="rose-sep">— 🌹 —</div>
+  </div>
+  <div class="gif-grid">
+    <div class="gif-card">
+      <a href="/tequiero.html" class="btn-back"><img src="https://i.pinimg.com/originals/52/d9/5e/52d95e4679261e75c3d39113addff954.gif" alt="corazon amor" /></a>
+      <div class="gif-label">💕 Te quiero tanto</div>
+    </div>
+    <div class="gif-card">
+     <a href="/osita.html"  class="btn-back"> <img src="img/bear-love-you.gif" alt="osito amor"/></a>
+      <div class="gif-label">🐻 Mi osita favorita</div>
+    </div>
+    <div class="gif-card">
+     <a href="/siempre.html" class="btn-back"> <img src="img/ally-nasty-woman.gif" alt="amor cute"/></a>
+      <div class="gif-label">💑 Siempre juntos</div>
+    </div>
+    <div class="gif-card">
+      <a href="/micorazon.html" class="btn-back"><img src="img/b9724e8d64393d16789b9e8061687d34.gif" alt="corazon"/></a>
+      <div class="gif-label">💗 Mi corazón late por ti</div>
+    </div>
+    <div class="gif-card">
+      <a href="/paratoda.html" class="btn-back"><img src="img/129884.gif" alt="love"/></a>
+      <div class="gif-label">🌹 Para toda la vida</div>
+    </div>
+    <div class="gif-card">
+      <a href="/ultimo.html" class="btn-back"><img src="img/bia.gif" alt="bear heart"/></a>
+      <div class="gif-label">🐻💖 Forever yours</div>
+    </div>
+  </div>
+</div>
+
+<!-- MENSAJE -->
+<div class="sec fade-in">
+  <h2 class="section-title">Desde el fondo de mi corazón</h2>
+  <div class="rose-sep">— 💕 —</div>
+  <div class="message-card">
+    <p class="message-text">
+    Mi amor, hoy celebramos <strong>otro año juntos</strong>, y al mirar todo lo que hemos vivido,
+no puedo evitar sentir una inmensa gratitud por tenerte en mi vida.<br><br>
+
+Gracias por <strong>apoyarme cuando más lo necesitaba</strong>, por estar a mi lado incluso
+en los momentos en que quizás no fui la mejor persona. Gracias por tu paciencia,
+por no soltar mi mano cuando las cosas se ponían difíciles.<br><br>
+
+Gracias por quedarte, por creer en nosotros, por nunca dejarme de lado
+y por enseñarme cada día lo que significa amar de verdad.<br><br>
+
+A veces sé que puedo equivocarme, sé que no soy perfecto,
+pero quiero que sepas que <strong>eres la persona que más amo en este mundo</strong>,
+y que cada día intento ser mejor por ti.<br><br>
+
+Perdón por todos mis errores y mis malos momentos,
+pero también gracias por ver en mí algo que vale la pena amar.<br><br>
+
+Eres mi calma cuando todo es tormenta, mi risa en los días grises,
+mi refugio y el lugar al que siempre quiero volver.<br><br>
+
+Que este <strong>13 de marzo</strong> quede grabado como un día más
+de todos los que quiero seguir viviendo contigo,
+porque si algo tengo claro es que <strong>te amo con todo lo que soy,
+con todo lo que fui y con todo lo que quiero llegar a ser</strong>.
+    </p>
+    <div class="message-signature">Con todo mi amor 💖</div>
+  </div>
+</div>
+
+<!-- POKÉMON -->
+<div class="poke-section fade-in">
+  <div style="max-width:900px;margin:0 auto;">
+    <h2 class="poke-title">Nuestros Pokémon del Amor</h2>
+    <p class="poke-sub">¡Porque nuestro amor es tan especial como un Pokémon legendario! ⚡💖</p>
+    <div style="text-align:center;font-size:1.4rem;letter-spacing:0.4rem;margin:0.5rem 0 2rem;color:#FFD700;opacity:0.5;">— ⚡ —</div>
+    <div class="poke-grid">
+      <div class="poke-card">
+        <div class="poke-tenor">
+          <a href="">
+            <img src="/img/pikapikapika.gif" style="width:100%;height:200px;object-fit:cover;" alt="Pikachu Love"/>
+          </a>
+        </div>
+        <div class="poke-label">⚡ Pikachu enamorado 💕</div>
+      </div>
+      <div class="poke-card">
+        <div class="poke-tenor">
+          <a href="">
+            <img src="/img/pikachu-love.gif" style="width:100%;height:200px;object-fit:cover;" alt="Pikachu Hearts"/>
+          </a>
+        </div>
+        <div class="poke-label">🌸 Pika pika, te amo 💖</div>
+      </div>
+      <div class="poke-card">
+        <div class="poke-tenor">
+          <a href="https://tenor.com/view/pikachu-jump-heart-love-happy-gif-15357554">
+            <img src="/img/pikachu-pokemon.gif" style="width:100%;height:200px;object-fit:cover;" alt="Pikachu Jump"/>
+          </a>
+        </div>
+        <div class="poke-label">💛 ¡Mi corazón salta por ti!</div>
+      </div>
+      <div class="poke-card">
+        <div class="poke-tenor">
+          <a href="https://tenor.com/view/pikachu-pokemon-love-sweet-hearts-gif-16494807">
+            <img src="/img/dulce.gif" style="width:100%;height:200px;object-fit:cover;" alt="Pikachu Sweet"/>
+          </a>
+        </div>
+        <div class="poke-label">🌟 Dulce como tú</div>
+      </div>
+      <div class="poke-card">
+        <div class="poke-tenor">
+          <a href="https://tenor.com/view/hug-pokemon-love-pikachu-couple-gif-2619153044372842603">
+            <img src="/img/hug-pokemon.gif" style="width:100%;height:200px;object-fit:cover;background:#1a1a3e;" alt="Pikachu Hug"/>
+          </a>
+        </div>
+        <div class="poke-label">🤗 Big hugs para siempre</div>
+      </div>
+      <div class="poke-card">
+        <div class="poke-tenor">
+          <a href="https://tenor.com/view/cheering-for-you-hearts-cute-pikachu-pokemon-gif-16163531">
+            <img src="/img/cheering-for-you-hearts.gif" style="width:100%;height:200px;object-fit:cover;background:#1a1a3e;" alt="Pikachu Cheering"/>
+          </a>
+        </div>
+        <div class="poke-label">🎉 ¡Te celebro cada día!</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AMOR CALCULATOR -->
+<div class="sec-full fade-in" style="background:linear-gradient(135deg,#fff0f3,#fff5e6);">
+  <div style="max-width:860px;margin:0 auto;text-align:center;">
+    <h2 class="section-title">Tiempo juntos 💖</h2>
+    <p class="section-sub">Desde el 13 de Marzo de 2022 — cada segundo contigo vale infinito</p>
+    <div class="rose-sep">— 🌹 —</div>
+    <div class="countdown-wrap">
+      <div class="count-box" style="border-top-color:#e8365d;">
+        <span class="count-num" id="lv-years">3</span>
+        <div class="count-label">Años</div>
+      </div>
+      <div class="count-box" style="border-top-color:#d4af37;">
+        <span class="count-num" id="lv-months">0</span>
+        <div class="count-label">Meses</div>
+      </div>
+      <div class="count-box" style="border-top-color:#ff6b8a;">
+        <span class="count-num" id="lv-days">0</span>
+        <div class="count-label">Días</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;max-width:700px;margin:2rem auto 0;">
+      <div style="background:white;border-radius:18px;padding:1.2rem;box-shadow:0 6px 20px rgba(232,54,93,0.1);border:1px solid rgba(232,54,93,0.12);">
+        <div style="font-size:1.8rem;margin-bottom:0.3rem;">📅</div>
+        <span style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--rose);display:block;" id="lv-total-days">—</span>
+        <div style="font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:#a07080;margin-top:0.2rem;">días totales</div>
+      </div>
+      <div style="background:white;border-radius:18px;padding:1.2rem;box-shadow:0 6px 20px rgba(232,54,93,0.1);border:1px solid rgba(232,54,93,0.12);">
+        <div style="font-size:1.8rem;margin-bottom:0.3rem;">⏰</div>
+        <span style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--rose);display:block;" id="lv-hours">—</span>
+        <div style="font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:#a07080;margin-top:0.2rem;">horas juntos</div>
+      </div>
+      <div style="background:white;border-radius:18px;padding:1.2rem;box-shadow:0 6px 20px rgba(232,54,93,0.1);border:1px solid rgba(232,54,93,0.12);">
+        <div style="font-size:1.8rem;margin-bottom:0.3rem;">💓</div>
+        <span style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--rose);display:block;" id="lv-heartbeats">—</span>
+        <div style="font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:#a07080;margin-top:0.2rem;">latidos por ti</div>
+      </div>
+      <div style="background:white;border-radius:18px;padding:1.2rem;box-shadow:0 6px 20px rgba(232,54,93,0.1);border:1px solid rgba(232,54,93,0.12);">
+        <div style="font-size:1.8rem;margin-bottom:0.3rem;">🌙</div>
+        <span style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--rose);display:block;" id="lv-nights">—</span>
+        <div style="font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:#a07080;margin-top:0.2rem;">noches soñándote</div>
+      </div>
+    </div>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;color:#7a3050;margin-top:2rem;font-size:1.05rem;">
+      Y cada uno de esos momentos ha sido el más bonito de mi vida 💕
+    </p>
+  </div>
+</div>
+
+<!-- 💍 PREGUNTA ESPECIAL -->
+<div class="question-section fade-in">
+  <div class="q-card" id="question-card">
+    <span class="q-emoji">💍</span>
+    <div class="q-text">
+      ¿Quieres seguir <span>a mi lado</span> muchos meses más... y toda la vida?
+    </div>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;color:#7a3050;font-size:1rem;margin-bottom:2rem;">
+      Eres la persona más especial de mi vida y quiero seguir construyendo contigo 💖
+    </p>
+    <div class="btn-wrap">
+      <button class="btn-yes" onclick="answerYes()">💖 ¡Sí, siempre! 💖</button>
+      <button class="btn-no" onclick="answerNo()">No...</button>
+    </div>
+  </div>
+</div>
+
+<!-- PANTALLA SÍ -->
+<div class="response-screen screen-yes" id="screen-yes">
+  <div style="font-size:3rem;letter-spacing:0.3rem;margin-bottom:1rem;">🎉💖🎊💕🎉💝🎊💗🎉</div>
+  <div class="screen-title-yes">¡Sabía que dirías que Sí!</div>
+  <p class="screen-msg screen-msg-yes">
+¡Eres mi todo, mi razón de sonreír cada mañana! 🌹
+Gracias por elegirme una vez más, por cada abrazo
+y por cada risa que compartimos juntos.
+Gracias por quedarte a mi lado incluso cuando
+no siempre fue fácil, cuando quizá era más sencillo irte.
+Tu decisión de seguir conmigo significa más
+de lo que las palabras pueden explicar.<br><br>
+<strong style="color:var(--rose);">Te amo más de lo que las palabras pueden decir,
+y cada día agradezco que sigas caminando a mi lado 💖</strong>
+  </p>
+  <div style="font-size:3rem;margin:1rem 0;">🌹💖⚡💕🌸💗🌺💝🌟</div>
+  <div style="width:180px;height:180px;border-radius:50%;overflow:hidden;border:4px solid var(--rose);margin:1rem auto;box-shadow:0 8px 30px rgba(232,54,93,0.3);">
+    <img src="https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" style="width:100%;height:100%;object-fit:cover;" alt="celebracion"/>
+  </div>
+  <button class="close-screen" onclick="closeScreen('screen-yes')">Volver a nuestra página 💖</button>
+</div>
+
+<!-- PANTALLA NO -->
+<div class="response-screen screen-no" id="screen-no">
+  <div style="font-size:3rem;letter-spacing:0.3rem;margin-bottom:1rem;">😢💧😔💔😿</div>
+  <div class="screen-title-no">Oh... se me rompió el corazón</div>
+  <p class="screen-msg screen-msg-no">
+    Está bien... no puedo obligarte a sentir lo que no sientes. 💧<br><br>
+    Pero quiero que sepas que todo lo que vivimos juntos fue real para mí,
+    y siempre guardaré cada momento contigo como el más precioso de mi vida.<br><br>
+    <span style="color:#6a8fff;">Espero que algún día vuelvas a decir que sí... 💙</span>
+  </p>
+  <div style="font-size:2.5rem;margin:1rem 0;">💔 😢 🌧️ 💧 😿 🌧️ 💧</div>
+  <div style="width:160px;height:160px;border-radius:20px;overflow:hidden;border:3px solid #6a8fff;margin:1rem auto;opacity:0.8;">
+    <img src="https://media.giphy.com/media/1n4iuWZFnTeN6qvdpD/giphy.gif" style="width:100%;height:100%;object-fit:cover;" alt="sad"/>
+  </div>
+  <button class="close-screen" style="border-color:#6a8fff;color:#6a8fff;" onclick="closeScreen('screen-no')">Regresar...</button>
+</div>
+
+<!-- FOTOS -->
+<div class="sec fade-in">
+  <h2 class="section-title">Fotos que me gustan de ti</h2>
+  <p class="section-sub">Porque eres hermoso/a en cada foto 📸💕</p>
+  <div class="rose-sep">— 📷 —</div>
+  <div class="media-section">
+    <div class="media-title">📸 Fotos que me encantan de ti</div>
+ 
+    <!-- Fotos -->
+    <div class="photo-grid" id="photo-grid" style="margin-bottom:2rem;">
+      <div class="photo-slot"><img src="img/1.jpeg" onerror="this.parentElement.style.display='none'"/></div>
+      <div class="photo-slot"><img src="img/2.jpeg" onerror="this.parentElement.style.display='none'"/></div>
+      <div class="photo-slot"><img src="img/3.jpeg" onerror="this.parentElement.style.display='none'"/></div>
+      <div class="photo-slot"><img src="img/4.jpeg" onerror="this.parentElement.style.display='none'"/></div>
+      <div class="photo-slot"><img src="img/5.jpeg" onerror="this.parentElement.style.display='none'"/></div>
+    </div>
+ 
+    <!-- Separador -->
+    <div class="rose-sep" style="margin:0 0 1.5rem;">— 🎬 —</div>
+    <div class="media-title" style="margin-bottom:0.3rem;">🎥 Mira a una enojona que amo mucho aa </div>
+    <p class="media-hint" style="margin-bottom:1.2rem;">amo a esta ñiña aaa  💖</p>
+ 
+    <!-- Video centrado -->
+    <div style="display:flex;justify-content:center;">
+      <div class="video-container" id="video-container" style="max-width:500px;width:100%;">
+        <video
+          id="video-element"
+          src="/img/6.mp4"
+          preload="metadata"
+          playsinline
+          style="width:100%;height:100%;object-fit:cover;display:block;"
+        ></video>
+        <div class="video-overlay" id="video-overlay" onclick="playVideo()">
+          <div class="video-play-icon">▶</div>
+          <p>Toca para reproducir 💖</p>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+</div>
+
+<!-- AUDIO -->
+<div class="sec-full fade-in" style="background:linear-gradient(135deg,#fff0f3,#f5e6ff);padding:4rem 1.5rem;">
+  <div style="max-width:860px;margin:0 auto;text-align:center;">
+    <h2 class="section-title">Nuestra Canción</h2>
+    <p class="section-sub">La música que nos une 🎵</p>
+    <div class="rose-sep">— 🎶 —</div>
+    <div class="media-section">
+      <div class="media-title">🎵 Reproductor de Audio</div>
+      <p class="media-hint">Sube el audio de tu canción especial</p>
+      <div class="audio-player">
+        <div class="audio-title">♪ Nuestra Canción ♪</div>
+        <div class="audio-sub">🎵 nuestra cancion.mp3</div>
+        <audio id="audio-element" controls src="/audio/NIGGA (FLEX) - TE AMO TANTO.mp3"></audio>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO — CORREGIDO -->
+<div class="sec fade-in">
+  <h2 class="section-title">Mira este video ❤️</h2>
+  <p class="section-sub">El video dedicado para ti 💕</p>
+  <div class="rose-sep">— 🎬 —</div>
+  <div class="media-section">
+    <div class="media-title">🎥 Si volviera a empezar mi historia…</div>
+    <p class="media-hint">volvería a elegirte a ti como mi compañera. 💖</p>
+
+    <!-- Contenedor de video con overlay de play -->
+    <div class="video-container" id="video-container">
+      <video
+        id="video-element"
+        src="img/parati.mp4"
+        preload="metadata"
+        playsinline
+        style="width:100%;height:100%;object-fit:cover;display:block;"
+      ></video>
+      <!-- Overlay para reproducir al hacer clic -->
+      <div class="video-overlay" id="video-overlay" onclick="playVideo()">
+        <div class="video-play-icon">▶</div>
+        <p>Toca para reproducir 💖</p>
+      </div>
+    </div>
+
+    <!-- Zona para reemplazar el video si quieres subir otro -->
+    
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-hearts">💖 💕 💗 💓 💞 💝</div>
+  <div class="footer-title">Con amor, hoy y siempre</div>
+  <p>13 de Marzo — Un día que nunca olvidaremos 🌹</p>
+  <br>
+  <p style="font-size:0.75rem;opacity:0.4;">Hecha con 💖 especialmente para ti</p>
+</footer>
+
+<script>
+// FALLING HEARTS
+const canvas = document.getElementById('hearts-canvas');
+const ctx = canvas.getContext('2d');
+const EMOJIS = ['💖','💕','💗','💓','💞','🌹','💝','🌸','💫','✨','⚡','🌟'];
+const hearts = [];
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+for (let i = 0; i < 35; i++) {
+  hearts.push({
+    x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight * 2 - window.innerHeight,
+    size: 14 + Math.random() * 22, speed: 0.4 + Math.random() * 0.8,
+    angle: Math.random() * Math.PI * 2, swingSpeed: 0.01 + Math.random() * 0.02,
+    emoji: EMOJIS[Math.floor(Math.random() * EMOJIS.length)]
+  });
+}
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hearts.forEach(h => {
+    h.y += h.speed; h.angle += h.swingSpeed; h.x += Math.sin(h.angle) * 0.6;
+    if (h.y > canvas.height + 60) { h.y = -60; h.x = Math.random() * canvas.width; }
+    ctx.font = `${h.size}px serif`; ctx.globalAlpha = 0.55; ctx.fillText(h.emoji, h.x, h.y);
+  });
+  ctx.globalAlpha = 1; requestAnimationFrame(animate);
+}
+animate();
+
+// LOVE DURATION CALCULATOR
+function calcLove() {
+  const start = new Date(2022, 2, 13);
+  const now = new Date();
+  let y = now.getFullYear() - start.getFullYear();
+  let m = now.getMonth() - start.getMonth();
+  let d = now.getDate() - start.getDate();
+  if (d < 0) { m--; const prev = new Date(now.getFullYear(), now.getMonth(), 0); d += prev.getDate(); }
+  if (m < 0) { y--; m += 12; }
+  document.getElementById('lv-years').textContent = y;
+  document.getElementById('lv-months').textContent = m;
+  document.getElementById('lv-days').textContent = d;
+  const totalMs = now - start;
+  const totalDays = Math.floor(totalMs / 86400000);
+  const totalHrs = Math.floor(totalMs / 3600000);
+  const heartbeats = Math.floor(totalMs / 1000 * 1.2);
+  function fmt(n) { return n.toLocaleString('es'); }
+  document.getElementById('lv-total-days').textContent = fmt(totalDays);
+  document.getElementById('lv-hours').textContent = fmt(totalHrs);
+  document.getElementById('lv-heartbeats').textContent = fmt(heartbeats);
+  document.getElementById('lv-nights').textContent = fmt(totalDays);
+}
+calcLove();
+setInterval(calcLove, 1000);
+
+// FADE IN
+const obs = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// YES/NO
+function launchConfetti() {
+  const colors = ['#e8365d','#ff6b8a','#ffd700','#ff9999','#ffb3d9','#ff6ed7','#a855f7'];
+  for (let i = 0; i < 100; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'confetti-dot';
+    dot.style.left = Math.random() * 100 + 'vw';
+    dot.style.top = Math.random() * 40 + 'vh';
+    dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+    dot.style.animationDelay = Math.random() * 1 + 's';
+    dot.style.width = (6 + Math.random() * 10) + 'px';
+    dot.style.height = (6 + Math.random() * 10) + 'px';
+    document.body.appendChild(dot);
+    setTimeout(() => dot.remove(), 2500);
+  }
+}
+function answerYes() {
+  launchConfetti();
+  setTimeout(() => {
+    document.getElementById('screen-yes').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }, 400);
+}
+function answerNo() {
+  document.getElementById('screen-no').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeScreen(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// VIDEO — play/pause toggle con overlay
+function playVideo() {
+  const video = document.getElementById('video-element');
+  const overlay = document.getElementById('video-overlay');
+  video.play();
+  overlay.classList.add('hidden');
+  // Si el usuario pausa, mostrar overlay de nuevo
+  video.onpause = () => { overlay.classList.remove('hidden'); };
+  video.onended = () => { overlay.classList.remove('hidden'); };
+}
+
+// UPLOADS
+function triggerUpload(id) { document.getElementById(id).click(); }
+
+function loadPhotos(input) {
+  const grid = document.getElementById('photo-grid');
+  let slots = Array.from(grid.querySelectorAll('.photo-slot'));
+  let si = 0;
+  Array.from(input.files).forEach(file => {
+    // Busca el primer slot vacío (sin imagen real)
+    while (si < slots.length && slots[si].querySelector('img[src^="blob"]')) si++;
+    if (si >= slots.length) {
+      const ns = document.createElement('div');
+      ns.className = 'photo-slot';
+      ns.onclick = () => triggerUpload('photo-input');
+      grid.appendChild(ns);
+      slots = Array.from(grid.querySelectorAll('.photo-slot'));
+    }
+    const slot = slots[si];
+    slot.innerHTML = '';
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    slot.appendChild(img);
+    si++;
+  });
+}
+
+function loadAudio(input) {
+  if (!input.files[0]) return;
+  const audio = document.getElementById('audio-element');
+  audio.src = URL.createObjectURL(input.files[0]);
+  audio.style.display = 'block';
+  document.getElementById('audio-placeholder').style.display = 'none';
+  document.getElementById('audio-name').textContent = '🎵 ' + input.files[0].name;
+}
+
+function loadVideo(input) {
+  if (!input.files[0]) return;
+  const video = document.getElementById('video-element');
+  video.src = URL.createObjectURL(input.files[0]);
+  video.load();
+  // Mostrar overlay listo para play
+  document.getElementById('video-overlay').classList.remove('hidden');
+}
+
+// SPARKLE on click
+document.addEventListener('click', e => {
+  const s = document.createElement('div');
+  s.className = 'sparkle';
+  s.textContent = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+  s.style.left = (e.clientX - 15) + 'px';
+  s.style.top = (e.clientY - 15) + 'px';
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 1000);
+});
+</script>
+</body>
+</html>
